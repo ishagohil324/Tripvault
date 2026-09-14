@@ -5,6 +5,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 const authRoutes = require("./routes/auth");
+const tripRoutes = require("./routes/trips");
 
 const app = express();
 
@@ -23,7 +24,7 @@ mongoose
 
 // Routes
 app.use("/api/auth", authRoutes);
-
+app.use("/api/trips", tripRoutes);
 // Test route
 app.get("/", (req, res) => {
   res.send("TripVault API is running");
