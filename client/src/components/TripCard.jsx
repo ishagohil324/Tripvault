@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function TripCard({
   trip,
@@ -8,11 +9,19 @@ function TripCard({
   const [showImage, setShowImage] = useState(false);
 
   // ========================================
+  // NAVIGATION
+  // ========================================
+
+  const navigate = useNavigate();
+
+  // ========================================
   // FORMAT DATE
   // ========================================
 
   const formatDate = (date) => {
-    if (!date) return "Not specified";
+    if (!date) {
+      return "Not specified";
+    }
 
     return new Date(date).toLocaleDateString(
       "en-US",
@@ -28,11 +37,25 @@ function TripCard({
   // IMAGE CLICK
   // ========================================
 
-  const handleImageClick = () => {
+  const handleImageClick = (event) => {
+    event.stopPropagation();
+
     if (trip.coverImage) {
       setShowImage(true);
     }
   };
+
+  // ========================================
+  // OPEN TRIP DETAILS
+  // ========================================
+
+  const handleTripDetails = () => {
+    navigate(`/trips/${trip._id}`);
+  };
+
+  // ========================================
+  // RETURN
+  // ========================================
 
   return (
     <>
@@ -55,6 +78,8 @@ function TripCard({
           onClick={handleImageClick}
         >
 
+          {/* REAL IMAGE */}
+
           {trip.coverImage ? (
             <img
               src={trip.coverImage}
@@ -62,10 +87,13 @@ function TripCard({
               className="trip-cover-image"
             />
           ) : (
+            /* PLACEHOLDER */
+
             <div className="trip-image-placeholder">
               ✈️
             </div>
           )}
+
 
           {/* IMAGE HOVER TEXT */}
 
@@ -75,10 +103,12 @@ function TripCard({
             </div>
           )}
 
+
           {/* RATING */}
 
           <div className="rating-badge">
             {trip.rating || 0}/5
+
             <span className="rating-star">
               ⭐
             </span>
@@ -95,7 +125,10 @@ function TripCard({
 
           {/* TITLE */}
 
-          <h2 className="trip-title">
+          <h2
+            className="trip-title clickable-title"
+            onClick={handleTripDetails}
+          >
             {trip.title}
           </h2>
 
@@ -103,6 +136,7 @@ function TripCard({
           {/* DESTINATION */}
 
           <div className="trip-detail">
+
             <span className="detail-icon">
               📍
             </span>
@@ -110,12 +144,14 @@ function TripCard({
             <span>
               {trip.destination}
             </span>
+
           </div>
 
 
           {/* DATE */}
 
           <div className="trip-detail">
+
             <span className="detail-icon">
               🗓️
             </span>
@@ -125,12 +161,14 @@ function TripCard({
               {" – "}
               {formatDate(trip.endDate)}
             </span>
+
           </div>
 
 
           {/* DESCRIPTION */}
 
           <div className="trip-detail trip-description">
+
             <span className="detail-icon">
               📝
             </span>
@@ -139,6 +177,7 @@ function TripCard({
               {trip.description ||
                 "No description"}
             </span>
+
           </div>
 
 
@@ -148,21 +187,29 @@ function TripCard({
 
           <div className="trip-buttons">
 
+            {/* EDIT */}
+
             <button
               className="edit-btn"
-              onClick={() =>
-                onEdit(trip)
-              }
+              onClick={(event) => {
+                event.stopPropagation();
+
+                onEdit(trip);
+              }}
             >
               ✎ Edit
             </button>
 
 
+            {/* DELETE */}
+
             <button
               className="delete-btn"
-              onClick={() =>
-                onDelete(trip._id)
-              }
+              onClick={(event) => {
+                event.stopPropagation();
+
+                onDelete(trip._id);
+              }}
             >
               🗑 Delete
             </button>
@@ -187,22 +234,28 @@ function TripCard({
           }
         >
 
+          {/* CLOSE BUTTON */}
+
           <button
             className="image-modal-close"
-            onClick={() =>
-              setShowImage(false)
-            }
+            onClick={(event) => {
+              event.stopPropagation();
+
+              setShowImage(false);
+            }}
           >
             ✕
           </button>
 
 
+          {/* LARGE IMAGE */}
+
           <img
             src={trip.coverImage}
             alt={trip.title}
             className="image-modal-content"
-            onClick={(e) =>
-              e.stopPropagation()
+            onClick={(event) =>
+              event.stopPropagation()
             }
           />
 

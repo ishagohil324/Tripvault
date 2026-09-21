@@ -1135,3 +1135,439 @@
     font-size: 35px;
   }
 }
+
+/* =========================================
+   TRIP DETAILS PAGE
+   ========================================= */
+
+.trip-details-page {
+  width: 100%;
+  min-height: 100vh;
+
+  padding: 35px 5% 70px;
+
+  color: white;
+}
+
+
+/* =========================================
+   BACK BUTTON
+   ========================================= */
+
+.back-button {
+  border: none;
+
+  padding: 11px 18px;
+
+  border-radius: 10px;
+
+  background:
+    rgba(255, 255, 255, 0.12);
+
+  color: white;
+
+  font-size: 15px;
+
+  cursor: pointer;
+
+  margin-bottom: 25px;
+
+  transition: 0.25s ease;
+}
+
+.back-button:hover {
+  background:
+    rgba(255, 255, 255, 0.22);
+
+  transform: translateX(-3px);
+}
+
+
+/* =========================================
+   HERO IMAGE
+   ========================================= */
+
+.trip-details-hero {
+  width: 100%;
+
+  height: 420px;
+
+  overflow: hidden;
+
+  border-radius: 25px;
+
+  margin-bottom: 25px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.18);
+
+  box-shadow:
+    0 20px 60px
+    rgba(0, 0, 0, 0.35);
+}
+
+.trip-details-hero img {
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+/* =========================================
+   DETAILS CARD
+   ========================================= */
+
+.trip-details-card {
+  padding: 30px;
+
+  border-radius: 22px;
+
+  background:
+    rgba(255, 255, 255, 0.08);
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.16);
+
+  backdrop-filter: blur(18px);
+
+  margin-bottom: 35px;
+}
+
+
+.trip-details-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-start;
+
+  gap: 20px;
+}
+
+
+.trip-details-header h1 {
+  margin: 0;
+
+  font-size: 38px;
+}
+
+
+.trip-location {
+  color: #a9c8ee;
+
+  font-size: 18px;
+
+  margin-top: 10px;
+}
+
+
+.details-rating {
+  padding: 12px 18px;
+
+  border-radius: 13px;
+
+  background:
+    rgba(20, 30, 40, 0.7);
+
+  font-size: 17px;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================
+   INFO
+   ========================================= */
+
+.details-info {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 25px;
+
+  margin-top: 30px;
+}
+
+
+.details-info > div {
+  padding: 20px;
+
+  border-radius: 16px;
+
+  background:
+    rgba(255, 255, 255, 0.06);
+}
+
+
+.details-info span {
+  font-size: 22px;
+
+  margin-right: 8px;
+}
+
+
+.details-info strong {
+  font-size: 17px;
+}
+
+
+.details-info p {
+  color: #c5d2e5;
+
+  line-height: 1.6;
+
+  margin-top: 10px;
+}
+
+
+/* =========================================
+   PHOTO SECTION
+   ========================================= */
+
+.trip-photo-section h2 {
+  font-size: 28px;
+
+  margin-bottom: 20px;
+}
+
+
+/* =========================================
+   PHOTO GALLERY
+   ========================================= */
+
+.photo-gallery {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 20px;
+}
+
+
+.gallery-photo {
+  position: relative;
+
+  height: 230px;
+
+  overflow: hidden;
+
+  border-radius: 18px;
+
+  cursor: pointer;
+
+  background:
+    rgba(255, 255, 255, 0.08);
+}
+
+
+.gallery-photo img {
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
+
+  transition:
+    transform 0.4s ease,
+    filter 0.4s ease;
+}
+
+
+.gallery-photo:hover img {
+  transform: scale(1.06);
+
+  filter: brightness(0.65);
+}
+
+
+/* =========================================
+   GALLERY OVERLAY
+   ========================================= */
+
+.gallery-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  opacity: 0;
+
+  color: white;
+
+  font-weight: 700;
+
+  font-size: 17px;
+
+  background:
+    rgba(0, 0, 0, 0.25);
+
+  transition: 0.3s ease;
+
+  pointer-events: none;
+}
+
+
+.gallery-photo:hover
+.gallery-overlay {
+  opacity: 1;
+}
+
+
+/* =========================================
+   NO PHOTOS
+   ========================================= */
+
+.no-photos {
+  padding: 40px;
+
+  text-align: center;
+
+  border-radius: 18px;
+
+  background:
+    rgba(255, 255, 255, 0.06);
+
+  color: #aebed5;
+}
+
+
+/* =========================================
+   PHOTO MODAL
+   ========================================= */
+
+.photo-modal {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 9999;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 40px;
+
+  background:
+    rgba(0, 0, 0, 0.90);
+
+  backdrop-filter: blur(8px);
+
+  cursor: pointer;
+}
+
+
+.photo-modal-image {
+  max-width: 90vw;
+
+  max-height: 88vh;
+
+  object-fit: contain;
+
+  border-radius: 15px;
+
+  box-shadow:
+    0 20px 80px
+    rgba(0, 0, 0, 0.7);
+
+  cursor: default;
+}
+
+
+.photo-modal-close {
+  position: fixed;
+
+  top: 25px;
+
+  right: 30px;
+
+  width: 45px;
+
+  height: 45px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background:
+    rgba(255, 255, 255, 0.15);
+
+  color: white;
+
+  font-size: 21px;
+
+  cursor: pointer;
+
+  z-index: 10000;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 900px) {
+
+  .photo-gallery {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .details-info {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .trip-details-page {
+    padding: 25px 4%;
+  }
+
+  .trip-details-hero {
+    height: 280px;
+  }
+
+  .trip-details-header {
+    flex-direction: column;
+  }
+
+  .photo-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .trip-details-header h1 {
+    font-size: 29px;
+  }
+
+}
+
+.clickable-title {
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.clickable-title:hover {
+  color: #75b8ff;
+}
