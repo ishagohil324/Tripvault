@@ -22,6 +22,7 @@ const tripSchema = new mongoose.Schema(
 
     description: {
       type: String,
+      default: "",
     },
 
     rating: {
@@ -35,7 +36,20 @@ const tripSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+
+    // 🆕 Week 3
+
+    coverImage: {
+      type: String,
+      default: "",
+    },
+
+    photos: {
+      type: [String],
+      default: [],
+    },
   },
+
   {
     timestamps: true,
   }

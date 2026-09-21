@@ -280,13 +280,508 @@
    TRIP GRID
    ========================================= */
 
+/* =========================================
+   TRIP GRID
+   ========================================= */
+
 .trip-grid {
+  width: 100%;
+
   display: grid;
 
   grid-template-columns:
     repeat(3, minmax(280px, 1fr));
 
-  gap: 24px;
+  gap: 28px;
+
+  align-items: stretch;
+
+  margin-top: 20px;
+}
+
+
+/* =========================================
+   TRIP CARD
+   ========================================= */
+
+.trip-card {
+  width: 100%;
+
+  min-height: 430px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  overflow: hidden;
+
+  border-radius: 22px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.12),
+      rgba(255, 255, 255, 0.055)
+    );
+
+  border: 1px solid
+    rgba(255, 255, 255, 0.20);
+
+  backdrop-filter: blur(18px);
+
+  -webkit-backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 18px 45px
+    rgba(0, 0, 0, 0.28);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+.trip-card:hover {
+  transform: translateY(-7px);
+
+  box-shadow:
+    0 25px 55px
+    rgba(0, 0, 0, 0.42);
+}
+
+
+/* =========================================
+   CARD IMAGE
+   ========================================= */
+
+.trip-image {
+  position: relative;
+
+  width: 100%;
+
+  height: 220px;
+
+  overflow: hidden;
+
+  flex-shrink: 0;
+
+  background:
+    linear-gradient(
+      135deg,
+      #4a90b8,
+      #1d526e
+    );
+
+  cursor: default;
+}
+
+
+/* =========================================
+   REAL UPLOADED IMAGE
+   ========================================= */
+
+.trip-image.has-cover-image {
+  cursor: pointer;
+}
+
+
+.trip-cover-image {
+  width: 100%;
+
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  object-position: center;
+
+  transition:
+    transform 0.45s ease,
+    filter 0.45s ease;
+}
+
+
+/* =========================================
+   IMAGE HOVER
+   ========================================= */
+
+.trip-image.has-cover-image:hover
+.trip-cover-image {
+  transform: scale(1.07);
+
+  filter: brightness(0.72);
+}
+
+
+/* =========================================
+   CLICK TO VIEW OVERLAY
+   ========================================= */
+
+.image-view-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  opacity: 0;
+
+  color: white;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  background:
+    rgba(0, 0, 0, 0.25);
+
+  transition:
+    opacity 0.3s ease;
+
+  pointer-events: none;
+}
+
+
+.trip-image.has-cover-image:hover
+.image-view-overlay {
+  opacity: 1;
+}
+
+
+/* =========================================
+   IMAGE PLACEHOLDER
+   ========================================= */
+
+.trip-image-placeholder {
+  width: 100%;
+
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 60px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #5aa9c8,
+      #2d657c,
+      #203a4d
+    );
+}
+
+
+/* =========================================
+   RATING
+   ========================================= */
+
+.rating-badge {
+  position: absolute;
+
+  top: 15px;
+
+  right: 15px;
+
+  z-index: 5;
+
+  padding: 9px 14px;
+
+  border-radius: 12px;
+
+  background:
+    rgba(25, 25, 30, 0.70);
+
+  backdrop-filter: blur(10px);
+
+  color: white;
+
+  font-weight: 700;
+
+  font-size: 15px;
+}
+
+
+.rating-star {
+  color: #ffd447;
+
+  margin-left: 5px;
+}
+
+
+/* =========================================
+   CARD CONTENT
+   ========================================= */
+
+.trip-card-content {
+  flex: 1;
+
+  display: flex;
+
+  flex-direction: column;
+
+  padding: 20px;
+}
+
+
+.trip-title {
+  margin: 0 0 14px;
+
+  color: white;
+
+  font-size: 23px;
+
+  font-weight: 750;
+
+  line-height: 1.2;
+}
+
+
+/* =========================================
+   DETAILS
+   ========================================= */
+
+.trip-detail {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 9px;
+
+  margin: 7px 0;
+
+  color: #c0cee3;
+
+  font-size: 15px;
+
+  line-height: 1.5;
+}
+
+
+.detail-icon {
+  width: 20px;
+
+  flex-shrink: 0;
+
+  color: #79b5ff;
+
+  font-size: 17px;
+}
+
+
+/* =========================================
+   DESCRIPTION
+   ========================================= */
+
+.trip-description {
+  min-height: 45px;
+
+  margin-top: 5px;
+}
+
+
+/* =========================================
+   BUTTONS
+   ========================================= */
+
+.trip-buttons {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 12px;
+
+  margin-top: auto;
+
+  padding-top: 18px;
+}
+
+
+.edit-btn,
+.delete-btn {
+  padding: 12px;
+
+  border-radius: 10px;
+
+  border: none;
+
+  cursor: pointer;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  transition:
+    0.25s ease;
+}
+
+
+.edit-btn {
+  background:
+    rgba(110, 145, 190, 0.38);
+
+  color: #dceaff;
+}
+
+
+.edit-btn:hover {
+  background:
+    rgba(110, 145, 190, 0.60);
+
+  transform: translateY(-2px);
+}
+
+
+.delete-btn {
+  background:
+    rgba(220, 70, 80, 0.30);
+
+  color: #ff858b;
+}
+
+
+.delete-btn:hover {
+  background:
+    rgba(220, 70, 80, 0.50);
+
+  transform: translateY(-2px);
+}
+
+
+/* =========================================
+   FULL IMAGE MODAL
+   ========================================= */
+
+.image-modal {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 9999;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 40px;
+
+  background:
+    rgba(0, 0, 0, 0.88);
+
+  backdrop-filter: blur(8px);
+
+  cursor: pointer;
+}
+
+
+/* =========================================
+   BIG IMAGE
+   ========================================= */
+
+.image-modal-content {
+  max-width: 90vw;
+
+  max-height: 88vh;
+
+  width: auto;
+
+  height: auto;
+
+  object-fit: contain;
+
+  border-radius: 16px;
+
+  box-shadow:
+    0 20px 80px
+    rgba(0, 0, 0, 0.65);
+
+  cursor: default;
+}
+
+
+/* =========================================
+   CLOSE BUTTON
+   ========================================= */
+
+.image-modal-close {
+  position: fixed;
+
+  top: 25px;
+
+  right: 30px;
+
+  z-index: 10000;
+
+  width: 45px;
+
+  height: 45px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background:
+    rgba(255, 255, 255, 0.15);
+
+  color: white;
+
+  font-size: 22px;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(10px);
+
+  transition:
+    0.25s ease;
+}
+
+
+.image-modal-close:hover {
+  background:
+    rgba(255, 255, 255, 0.30);
+
+  transform: rotate(90deg);
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 1100px) {
+
+  .trip-grid {
+    grid-template-columns:
+      repeat(2, minmax(280px, 1fr));
+  }
+
+}
+
+
+@media (max-width: 650px) {
+
+  .trip-grid {
+    grid-template-columns: 1fr;
+
+    gap: 20px;
+  }
+
+
+  .trip-image {
+    height: 210px;
+  }
+
 }
 
 

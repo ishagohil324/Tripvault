@@ -1,116 +1,216 @@
-function TripCard({ trip, onEdit, onDelete }) {
+import { useState } from "react";
 
-  const getDestinationClass = () => {
-    const destination = trip.destination?.toLowerCase() || "";
+function TripCard({
+  trip,
+  onEdit,
+  onDelete,
+}) {
+  const [showImage, setShowImage] = useState(false);
 
-    if (destination.includes("bali")) return "bali";
-    if (destination.includes("manali")) return "manali";
-    if (destination.includes("goa")) return "goa";
-    if (
-      destination.includes("paris") ||
-      destination.includes("france")
-    ) {
-      return "paris";
+  // ========================================
+  // FORMAT DATE
+  // ========================================
+
+  const formatDate = (date) => {
+    if (!date) return "Not specified";
+
+    return new Date(date).toLocaleDateString(
+      "en-US",
+      {
+        month: "short",
+        day: "2-digit",
+        year: "numeric",
+      }
+    );
+  };
+
+  // ========================================
+  // IMAGE CLICK
+  // ========================================
+
+  const handleImageClick = () => {
+    if (trip.coverImage) {
+      setShowImage(true);
     }
-    if (destination.includes("munnar")) return "munnar";
-    if (
-      destination.includes("rajasthan") ||
-      destination.includes("jaipur")
-    ) {
-      return "rajasthan";
-    }
-
-    return "goa";
   };
 
   return (
-    <article className="trip-card">
+    <>
+      {/* ======================================
+          TRIP CARD
+          ====================================== */}
 
-      {/* Image / visual area */}
-      <div
-        className={`trip-image ${getDestinationClass()}`}
-      >
+      <div className="trip-card">
 
-        {trip.rating && (
+        {/* ====================================
+            IMAGE
+            ==================================== */}
+
+        <div
+          className={`trip-image ${
+            trip.coverImage
+              ? "has-cover-image"
+              : ""
+          }`}
+          onClick={handleImageClick}
+        >
+
+          {trip.coverImage ? (
+            <img
+              src={trip.coverImage}
+              alt={`${trip.title} trip`}
+              className="trip-cover-image"
+            />
+          ) : (
+            <div className="trip-image-placeholder">
+              ✈️
+            </div>
+          )}
+
+          {/* IMAGE HOVER TEXT */}
+
+          {trip.coverImage && (
+            <div className="image-view-overlay">
+              🔍 Click to view
+            </div>
+          )}
+
+          {/* RATING */}
+
           <div className="rating-badge">
-            {trip.rating}/5
-            <span className="rating-star">★</span>
+            {trip.rating || 0}/5
+            <span className="rating-star">
+              ⭐
+            </span>
           </div>
-        )}
+
+        </div>
+
+
+        {/* ====================================
+            CARD CONTENT
+            ==================================== */}
+
+        <div className="trip-card-content">
+
+          {/* TITLE */}
+
+          <h2 className="trip-title">
+            {trip.title}
+          </h2>
+
+
+          {/* DESTINATION */}
+
+          <div className="trip-detail">
+            <span className="detail-icon">
+              📍
+            </span>
+
+            <span>
+              {trip.destination}
+            </span>
+          </div>
+
+
+          {/* DATE */}
+
+          <div className="trip-detail">
+            <span className="detail-icon">
+              🗓️
+            </span>
+
+            <span>
+              {formatDate(trip.startDate)}
+              {" – "}
+              {formatDate(trip.endDate)}
+            </span>
+          </div>
+
+
+          {/* DESCRIPTION */}
+
+          <div className="trip-detail trip-description">
+            <span className="detail-icon">
+              📝
+            </span>
+
+            <span>
+              {trip.description ||
+                "No description"}
+            </span>
+          </div>
+
+
+          {/* ==================================
+              BUTTONS
+              ================================== */}
+
+          <div className="trip-buttons">
+
+            <button
+              className="edit-btn"
+              onClick={() =>
+                onEdit(trip)
+              }
+            >
+              ✎ Edit
+            </button>
+
+
+            <button
+              className="delete-btn"
+              onClick={() =>
+                onDelete(trip._id)
+              }
+            >
+              🗑 Delete
+            </button>
+
+          </div>
+
+        </div>
 
       </div>
 
 
-      {/* Card content */}
-      <div className="trip-card-content">
+      {/* ======================================
+          FULL IMAGE POPUP
+          ====================================== */}
 
-        <h3 className="trip-title">
-          {trip.title}
-        </h3>
+      {showImage && trip.coverImage && (
 
-
-        <div className="trip-detail">
-          <span className="detail-icon">📍</span>
-
-          <span>
-            {trip.destination}
-          </span>
-        </div>
-
-
-        <div className="trip-detail">
-          <span className="detail-icon">📅</span>
-
-          <span>
-            {trip.startDate
-              ? new Date(
-                  trip.startDate
-                ).toLocaleDateString()
-              : "No start date"}
-
-            {"  –  "}
-
-            {trip.endDate
-              ? new Date(
-                  trip.endDate
-                ).toLocaleDateString()
-              : "No end date"}
-          </span>
-        </div>
-
-
-        <div className="trip-detail">
-          <span className="detail-icon">📝</span>
-
-          <span>
-            {trip.description || "No description"}
-          </span>
-        </div>
-
-
-        {/* Buttons */}
-        <div className="trip-buttons">
+        <div
+          className="image-modal"
+          onClick={() =>
+            setShowImage(false)
+          }
+        >
 
           <button
-            className="edit-btn"
-            onClick={() => onEdit(trip)}
+            className="image-modal-close"
+            onClick={() =>
+              setShowImage(false)
+            }
           >
-            ✎ &nbsp; Edit
+            ✕
           </button>
 
 
-          <button
-            className="delete-btn"
-            onClick={() => onDelete(trip._id)}
-          >
-            🗑 &nbsp; Delete
-          </button>
+          <img
+            src={trip.coverImage}
+            alt={trip.title}
+            className="image-modal-content"
+            onClick={(e) =>
+              e.stopPropagation()
+            }
+          />
 
         </div>
 
-      </div>
+      )}
 
-    </article>
+    </>
   );
 }
 
